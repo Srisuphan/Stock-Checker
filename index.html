@@ -4,100 +4,102 @@ body{font-family:var(--font-sans);color:#2D1B69;background:transparent}
 
 
 .nav{display:flex;gap:6px;padding:1rem 0 1.25rem;border-bottom:2px solid #DDD6FE;margin-bottom:1.25rem;flex-wrap:wrap}
-.nav button{padding:8px 16px;font-size:13px;border:1.5px solid #C4B5FD;border-radius:20px;background:#F5F3FF;color:#6D28D9;cursor:pointer;transition:all .2s;font-weight:500}
+.nav button{padding:10px 18px;font-size:16px;border:1.5px solid #C4B5FD;border-radius:20px;background:#F5F3FF;color:#6D28D9;cursor:pointer;transition:all .2s;font-weight:500}
 .nav button:hover{background:#EDE9FE;border-color:#A78BFA}
 .nav button.active{background:linear-gradient(135deg,#8B5CF6,#7C3AED);color:#fff;border-color:#7C3AED;box-shadow:0 2px 8px rgba(124,58,237,0.3)}
 
 .page{display:none}.page.active{display:block}
 .form-row{display:flex;gap:12px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
-input[type=date]{border:1.5px solid #C4B5FD;border-radius:10px;padding:9px 12px;font-size:14px;background:#FAFAFF;color:#3B1FA3;outline:none}
+.date-pick{border:1.5px solid #C4B5FD;border-radius:10px;padding:10px 12px;font-size:16px;background:#FAFAFF;color:#3B1FA3;outline:none;cursor:pointer;width:150px;transition:border-color .2s}
+.date-pick:focus{border-color:#7C3AED;background:#fff}
+input[type=date]{border:1.5px solid #C4B5FD;border-radius:10px;padding:10px 12px;font-size:16px;background:#FAFAFF;color:#3B1FA3;outline:none}
 
 .dd-wrap{position:relative;flex:1;min-width:220px}
-.dd-input{width:100%;border:1.5px solid #C4B5FD;border-radius:10px;padding:9px 12px;font-size:14px;background:#FAFAFF;color:#3B1FA3;outline:none;cursor:pointer}
+.dd-input{width:100%;border:1.5px solid #C4B5FD;border-radius:10px;padding:11px 14px;font-size:16px;background:#FAFAFF;color:#3B1FA3;outline:none;cursor:pointer}
 .dd-input:focus{border-color:#7C3AED;background:#fff}
 .dd-list{display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;background:#fff;border:1.5px solid #C4B5FD;border-radius:10px;max-height:280px;overflow-y:auto;z-index:200;box-shadow:0 8px 24px rgba(139,92,246,0.15)}
 .dd-list.open{display:block}
-.dd-group-label{font-size:11px;font-weight:700;color:#8B5CF6;padding:8px 12px 4px;background:#F5F3FF;letter-spacing:0.8px;position:sticky;top:0}
-.dd-item{padding:9px 14px;font-size:13px;color:#3B1FA3;cursor:pointer;border-bottom:1px solid #F3F0FF;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.dd-group-label{font-size:14px;font-weight:700;color:#8B5CF6;padding:8px 12px 4px;background:#F5F3FF;letter-spacing:0.8px;position:sticky;top:0}
+.dd-item{padding:13px 16px;font-size:16px;color:#3B1FA3;cursor:pointer;border-bottom:1px solid #F3F0FF;display:flex;justify-content:space-between;align-items:center;gap:8px}
 .dd-item:last-child{border-bottom:none}
 .dd-item:hover{background:#EDE9FE}
 .dd-item.hidden{display:none}
-.dd-item-loc{font-size:11px;color:#A78BFA;font-weight:600;background:#F5F3FF;border-radius:6px;padding:2px 6px;flex-shrink:0}
-.dd-empty{padding:12px;text-align:center;color:#A78BFA;font-size:13px}
+.dd-item-loc{font-size:14px;color:#A78BFA;font-weight:600;background:#F5F3FF;border-radius:6px;padding:2px 6px;flex-shrink:0}
+.dd-empty{padding:12px;text-align:center;color:#A78BFA;font-size:15px}
 
-.qty-ctrl{display:flex;align-items:center;border:1.5px solid #C4B5FD;border-radius:10px;overflow:hidden;background:#fff}
-.qty-ctrl button{width:38px;height:38px;border:none;background:#EDE9FE;color:#6D28D9;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:500}
+.qty-ctrl{display:flex;align-items:center;border:2px solid #C4B5FD;border-radius:14px;overflow:hidden;background:#fff}
+.qty-ctrl button{width:57px;height:57px;border:none;background:#EDE9FE;color:#6D28D9;font-size:30px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:500}
 .qty-ctrl button:hover{background:#DDD6FE}
-.qty-ctrl span{width:48px;text-align:center;font-size:16px;font-weight:600;color:#4C1D95;background:#FAFAFF}
+.qty-ctrl span{width:72px;text-align:center;font-size:24px;font-weight:700;color:#4C1D95;background:#FAFAFF;line-height:57px}
 
-.btn-submit{padding:10px 22px;border-radius:10px;border:none;cursor:pointer;font-size:14px;font-weight:600;transition:all .2s}
+.btn-submit{padding:14px 28px;border-radius:12px;border:none;cursor:pointer;font-size:17px;font-weight:600;transition:all .2s}
 .btn-out{background:linear-gradient(135deg,#F472B6,#EC4899);color:#fff}
 .btn-out:hover{background:linear-gradient(135deg,#EC4899,#DB2777)}
 .btn-in{background:linear-gradient(135deg,#34D399,#10B981);color:#fff}
 .btn-in:hover{background:linear-gradient(135deg,#10B981,#059669)}
 
-.section-title{font-size:16px;font-weight:600;margin-bottom:1rem;color:#4C1D95;display:flex;align-items:center;gap:8px}
-.info-box{background:linear-gradient(135deg,#F5F3FF,#EDE9FE);border-radius:12px;padding:12px 16px;font-size:13px;color:#5B21B6;margin-bottom:1rem;border-left:4px solid #8B5CF6}
-.stock-preview{display:flex;gap:8px;align-items:center;font-size:13px;padding:10px 14px;background:linear-gradient(135deg,#F5F3FF,#EDE9FE);border-radius:10px;margin-bottom:1rem;border:1px solid #DDD6FE;color:#4C1D95;flex-wrap:wrap}
-.stock-num{font-weight:700;font-size:16px;color:#6D28D9}
+.section-title{font-size:19px;font-weight:600;margin-bottom:1rem;color:#4C1D95;display:flex;align-items:center;gap:8px}
+.info-box{background:linear-gradient(135deg,#F5F3FF,#EDE9FE);border-radius:12px;padding:14px 18px;font-size:15px;color:#5B21B6;margin-bottom:1rem;border-left:4px solid #8B5CF6}
+.stock-preview{display:flex;gap:8px;align-items:center;font-size:16px;padding:10px 14px;background:linear-gradient(135deg,#F5F3FF,#EDE9FE);border-radius:10px;margin-bottom:1rem;border:1px solid #DDD6FE;color:#4C1D95;flex-wrap:wrap}
+.stock-num{font-weight:700;font-size:20px;color:#6D28D9}
 
-.badge{display:inline-block;font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600}
+.badge{display:inline-block;font-size:13px;padding:4px 12px;border-radius:20px;font-weight:600}
 .badge-out{background:#FDF2F8;color:#9D174D;border:1px solid #FBCFE8}
 .badge-in{background:#ECFDF5;color:#065F46;border:1px solid #A7F3D0}
 .badge-ba{background:#EDE9FE;color:#5B21B6;border:1px solid #C4B5FD}
 .badge-gd{background:#FDF4FF;color:#86198F;border:1px solid #E879F9}
 
 .day-log{margin-top:1.5rem}
-.day-log-header{font-size:13px;font-weight:700;color:#5B21B6;padding:6px 12px;background:linear-gradient(135deg,#F5F3FF,#EDE9FE);border-radius:8px;display:flex;align-items:center;gap:6px;margin-bottom:0}
-.log-item{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid #F3F0FF;font-size:13px;color:#3B1FA3}
+.day-log-header{font-size:15px;font-weight:700;color:#5B21B6;padding:6px 12px;background:linear-gradient(135deg,#F5F3FF,#EDE9FE);border-radius:8px;display:flex;align-items:center;gap:6px;margin-bottom:0}
+.log-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid #F3F0FF;font-size:15px;color:#3B1FA3}
 .log-item:last-child{border-bottom:none}
 .log-item-name{flex:1;font-weight:500}
-.log-item-qty{font-weight:700;font-size:14px}
-.log-item-after{font-size:12px;color:#7C3AED}
-.log-item-time{font-size:11px;color:#A78BFA;min-width:40px;text-align:right}
+.log-item-qty{font-weight:700;font-size:16px}
+.log-item-after{font-size:14px;color:#7C3AED}
+.log-item-time{font-size:13px;color:#A78BFA;min-width:40px;text-align:right}
 .log-card{background:#fff;border:1.5px solid #DDD6FE;border-radius:12px;overflow:hidden;margin-bottom:10px}
-.btn-del{border:1px solid #FBCFE8;background:#FDF2F8;border-radius:6px;cursor:pointer;color:#EC4899;font-size:12px;font-weight:600;padding:3px 8px;flex-shrink:0;line-height:1.4}
+.btn-del{border:1px solid #FBCFE8;background:#FDF2F8;border-radius:6px;cursor:pointer;color:#EC4899;font-size:14px;font-weight:600;padding:5px 12px;flex-shrink:0;line-height:1.4}
 .btn-del:hover{background:#FBCFE8}
 
-table{width:100%;border-collapse:collapse;font-size:13px}
-th{text-align:left;padding:10px 12px;background:#F5F3FF;color:#5B21B6;font-weight:600;font-size:12px}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th{text-align:left;padding:11px 14px;background:#F5F3FF;color:#5B21B6;font-weight:600;font-size:14px}
 th:first-child{border-radius:8px 0 0 8px}th:last-child{border-radius:0 8px 8px 0}
 td{padding:9px 12px;border-bottom:1px solid #F3F0FF;color:#3B1FA3}
 tr:last-child td{border-bottom:none}
 tr:hover td{background:#FAFAFF}
 
 .filter-row{display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap;align-items:center}
-.filter-row select{border:1.5px solid #C4B5FD;border-radius:10px;padding:7px 10px;font-size:13px;background:#FAFAFF;color:#3B1FA3;outline:none}
+.filter-row select{border:1.5px solid #C4B5FD;border-radius:10px;padding:9px 12px;font-size:15px;background:#FAFAFF;color:#3B1FA3;outline:none}
 
 .stock-list{border:1.5px solid #DDD6FE;border-radius:12px;overflow:hidden;margin-bottom:1rem}
-.stock-list-item{display:flex;align-items:center;gap:10px;padding:9px 14px;border-bottom:1px solid #F3F0FF;font-size:13px}
+.stock-list-item{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid #F3F0FF;font-size:15px}
 .stock-list-item:last-child{border-bottom:none}
 .stock-list-item:hover{background:#FAFAFF}
 .sli-name{flex:1;font-weight:500;color:#3B1FA3}
-.sli-company{font-size:11px;color:#7C3AED;min-width:90px;flex-shrink:0}
-.sli-loc{font-size:11px;color:#A78BFA;font-weight:600;background:#F5F3FF;border-radius:6px;padding:2px 6px;flex-shrink:0}
-.sli-qty{font-weight:700;font-size:15px;min-width:50px;text-align:right;flex-shrink:0}
+.sli-company{font-size:13px;color:#7C3AED;min-width:90px;flex-shrink:0}
+.sli-loc{font-size:13px;color:#A78BFA;font-weight:600;background:#F5F3FF;border-radius:6px;padding:2px 6px;flex-shrink:0}
+.sli-qty{font-weight:700;font-size:17px;min-width:50px;text-align:right;flex-shrink:0}
 .sli-qty.low{color:#EC4899}.sli-qty.ok{color:#10B981}.sli-qty.zero{color:#C4B5FD}
 
-.section-head{font-size:14px;font-weight:700;margin:1.5rem 0 .75rem;padding:8px 14px;border-radius:8px;display:inline-flex;align-items:center;gap:8px}
+.section-head{font-size:16px;font-weight:700;margin:1.5rem 0 .75rem;padding:8px 14px;border-radius:8px;display:inline-flex;align-items:center;gap:8px}
 .section-head-ba{background:linear-gradient(135deg,#EDE9FE,#DDD6FE);color:#4C1D95}
 .section-head-gd{background:linear-gradient(135deg,#FDF4FF,#F5D0FE);color:#86198F}
-.loc-label{font-size:12px;color:#7C3AED;margin:0 0 6px;font-weight:700;padding:4px 10px;background:#F5F3FF;border-radius:6px;display:inline-block}
+.loc-label{font-size:14px;color:#7C3AED;margin:0 0 6px;font-weight:700;padding:4px 10px;background:#F5F3FF;border-radius:6px;display:inline-block}
 
-.loader{text-align:center;padding:2rem;color:#A78BFA;font-size:13px}
+.loader{text-align:center;padding:2rem;color:#A78BFA;font-size:15px}
 .loader-spin{display:inline-block;width:20px;height:20px;border:2px solid #DDD6FE;border-top-color:#8B5CF6;border-radius:50%;animation:spin .7s linear infinite;margin-bottom:8px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.empty{text-align:center;padding:2rem;color:#A78BFA;font-size:13px}
+.empty{text-align:center;padding:2rem;color:#A78BFA;font-size:15px}
 /* tablet / mobile */
 @media (max-width: 768px) {
-  .dd-input,.qty-ctrl button,.btn-submit{font-size:16px} /* prevent iOS auto-zoom */
+  .dd-input,.qty-ctrl button,.btn-submit{font-size:18px} /* prevent iOS auto-zoom */
   input[type=text]{font-size:16px}
-  .qty-ctrl button{width:44px;height:44px}
+  .qty-ctrl button{width:57px;height:57px}
   .btn-submit{padding:12px 20px}
   .nav button{padding:10px 14px}
   .dd-list{max-height:60vh}
 }
-.toast{position:fixed;bottom:20px;right:20px;background:#fff;border:1.5px solid #C4B5FD;border-radius:12px;padding:12px 18px;font-size:13px;font-weight:500;color:#4C1D95;opacity:0;transition:opacity .3s;pointer-events:none;z-index:300;box-shadow:0 4px 16px rgba(139,92,246,0.2)}
+.toast{position:fixed;bottom:20px;right:20px;background:#fff;border:1.5px solid #C4B5FD;border-radius:12px;padding:14px 20px;font-size:15px;font-weight:500;color:#4C1D95;opacity:0;transition:opacity .3s;pointer-events:none;z-index:300;box-shadow:0 4px 16px rgba(139,92,246,0.2)}
 .toast.show{opacity:1}
 </style>
 
@@ -108,7 +110,7 @@ tr:hover td{background:#FAFAFF}
 
 <!-- Main app (hidden until connected) -->
 <div id="main-app" style="display:none">
-  <div style="margin-bottom:6px;font-size:11px;color:#10B981;font-weight:600" id="conn-badge">● เชื่อมต่อ Google Sheet แล้ว</div>
+  <div style="margin-bottom:6px;font-size:14px;color:#10B981;font-weight:600" id="conn-badge">● เชื่อมต่อ Google Sheet แล้ว</div>
 
   <div class="nav">
     <button class="active" onclick="showPage('out')">ยามาร้าน</button>
@@ -127,8 +129,7 @@ tr:hover td{background:#FAFAFF}
         <input type="hidden" id="out-product">
         <div class="dd-list" id="dd-out-list"></div>
       </div>
-      <input type="text" id="out-date-display" placeholder="DD/MM/YY" maxlength="8" style="width:110px;border:1.5px solid #C4B5FD;border-radius:10px;padding:9px 12px;font-size:14px;background:#FAFAFF;color:#3B1FA3;outline:none" oninput="fmtDateInput(this,'out-date')" onfocus="this.style.borderColor='#7C3AED'" onblur="this.style.borderColor='#C4B5FD'">
-      <input type="hidden" id="out-date">
+      <input type="date" id="out-date" class="date-pick" onchange="syncDateDisplay('out')">
     </div>
     <div id="out-preview" style="display:none" class="stock-preview">
       <span>สต็อกปัจจุบัน:</span>
@@ -160,8 +161,7 @@ tr:hover td{background:#FAFAFF}
         <input type="hidden" id="in-product">
         <div class="dd-list" id="dd-in-list"></div>
       </div>
-      <input type="text" id="in-date-display" placeholder="DD/MM/YY" maxlength="8" style="width:110px;border:1.5px solid #C4B5FD;border-radius:10px;padding:9px 12px;font-size:14px;background:#FAFAFF;color:#3B1FA3;outline:none" oninput="fmtDateInput(this,'in-date')" onfocus="this.style.borderColor='#7C3AED'" onblur="this.style.borderColor='#C4B5FD'">
-      <input type="hidden" id="in-date">
+      <input type="date" id="in-date" class="date-pick" onchange="syncDateDisplay('in')">
     </div>
     <div id="in-preview" style="display:none" class="stock-preview">
       <span>สต็อกปัจจุบัน:</span>
@@ -300,21 +300,8 @@ function fmtDate(isoStr){
   const yy=String(d.getFullYear()+543).slice(-2);
   return dd+'/'+mm+'/'+yy;
 }
-function displayToISO(str){
-  const p=str.replace(/[^0-9]/g,'');
-  if(p.length<6)return '';
-  const dd=p.slice(0,2),mm=p.slice(2,4),yy=p.slice(4,6);
-  const year=2000+parseInt(yy)-543;
-  return year+'-'+mm+'-'+dd;
-}
-function fmtDateInput(el,hiddenId){
-  let v=el.value.replace(/[^0-9]/g,'');
-  if(v.length>2)v=v.slice(0,2)+'/'+v.slice(2);
-  if(v.length>5)v=v.slice(0,5)+'/'+v.slice(5);
-  el.value=v.slice(0,8);
-  document.getElementById(hiddenId).value=displayToISO(el.value);
-}
 function todayISO(){ return new Date().toISOString().slice(0,10); }
+function syncDateDisplay(t){ /* date input handles its own value */ }
 function fmtTime(t){
   if(!t) return '';
   var s=String(t);
@@ -426,8 +413,6 @@ function init(){
   const t=todayISO();
   document.getElementById('out-date').value=t;
   document.getElementById('in-date').value=t;
-  document.getElementById('out-date-display').value=fmtDate(t);
-  document.getElementById('in-date-display').value=fmtDate(t);
   loadAll();
 }
 
