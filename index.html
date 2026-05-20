@@ -88,6 +88,15 @@ tr:hover td{background:#FAFAFF}
 .loader-spin{display:inline-block;width:20px;height:20px;border:2px solid #DDD6FE;border-top-color:#8B5CF6;border-radius:50%;animation:spin .7s linear infinite;margin-bottom:8px}
 @keyframes spin{to{transform:rotate(360deg)}}
 .empty{text-align:center;padding:2rem;color:#A78BFA;font-size:13px}
+/* tablet / mobile */
+@media (max-width: 768px) {
+  .dd-input,.qty-ctrl button,.btn-submit{font-size:16px} /* prevent iOS auto-zoom */
+  input[type=text]{font-size:16px}
+  .qty-ctrl button{width:44px;height:44px}
+  .btn-submit{padding:12px 20px}
+  .nav button{padding:10px 14px}
+  .dd-list{max-height:60vh}
+}
 .toast{position:fixed;bottom:20px;right:20px;background:#fff;border:1.5px solid #C4B5FD;border-radius:12px;padding:12px 18px;font-size:13px;font-weight:500;color:#4C1D95;opacity:0;transition:opacity .3s;pointer-events:none;z-index:300;box-shadow:0 4px 16px rgba(139,92,246,0.2)}
 .toast.show{opacity:1}
 </style>
@@ -114,7 +123,7 @@ tr:hover td{background:#FAFAFF}
     <div class="info-box">🏷️ เลือกรายการสินค้าและจำนวนที่ต้องการส่งออก แล้วกดยืนยัน</div>
     <div class="form-row">
       <div class="dd-wrap" id="dd-out-wrap">
-        <input class="dd-input" id="dd-out-input" type="text" placeholder="🔍 ค้นหาหรือเลือกสินค้า..." autocomplete="off" readonly onfocus="openDD('out')" oninput="filterDD('out')">
+        <input class="dd-input" id="dd-out-input" type="text" placeholder="🔍 ค้นหาหรือเลือกสินค้า..." autocomplete="off" onfocus="openDD('out')" ontouchstart="openDD('out')" oninput="filterDD('out')" onclick="openDD('out')">
         <input type="hidden" id="out-product">
         <div class="dd-list" id="dd-out-list"></div>
       </div>
@@ -147,7 +156,7 @@ tr:hover td{background:#FAFAFF}
     <div class="info-box">📦 เลือกรายการสินค้าและจำนวนที่รับเข้า แล้วกดยืนยัน</div>
     <div class="form-row">
       <div class="dd-wrap" id="dd-in-wrap">
-        <input class="dd-input" id="dd-in-input" type="text" placeholder="🔍 ค้นหาหรือเลือกสินค้า..." autocomplete="off" readonly onfocus="openDD('in')" oninput="filterDD('in')">
+        <input class="dd-input" id="dd-in-input" type="text" placeholder="🔍 ค้นหาหรือเลือกสินค้า..." autocomplete="off" onfocus="openDD('in')" ontouchstart="openDD('in')" oninput="filterDD('in')" onclick="openDD('in')">
         <input type="hidden" id="in-product">
         <div class="dd-list" id="dd-in-list"></div>
       </div>
@@ -348,10 +357,12 @@ function buildDD(t){
   list.innerHTML=html||'<div class="dd-empty">ยังไม่มีข้อมูล</div>';
 }
 function openDD(t){
-  document.getElementById('dd-'+t+'-input').readOnly=false;
-  document.getElementById('dd-'+t+'-input').select();
+  var el=document.getElementById('dd-'+t+'-input');
+  // clear placeholder text if it's the selected value display (not search query)
   filterDD(t);
   document.getElementById('dd-'+t+'-list').classList.add('open');
+  // ensure keyboard appears on mobile
+  el.focus();
 }
 function filterDD(t){
   const q=document.getElementById('dd-'+t+'-input').value.toLowerCase();
@@ -373,8 +384,9 @@ function filterDD(t){
   else if(em) em.remove();
 }
 function selectDD(t,idx,name){
-  document.getElementById('dd-'+t+'-input').value=name;
-  document.getElementById('dd-'+t+'-input').readOnly=true;
+  var el=document.getElementById('dd-'+t+'-input');
+  el.value=name;
+  el.blur();
   document.getElementById(t+'-product').value=idx;
   document.getElementById('dd-'+t+'-list').classList.remove('open');
   updatePreview(t);
@@ -382,9 +394,19 @@ function selectDD(t,idx,name){
 document.addEventListener('click',e=>{
   ['out','in'].forEach(t=>{
     const w=document.getElementById('dd-'+t+'-wrap');
-    if(w&&!w.contains(e.target)){ document.getElementById('dd-'+t+'-list').classList.remove('open'); document.getElementById('dd-'+t+'-input').readOnly=true; }
+    if(w&&!w.contains(e.target)){
+      document.getElementById('dd-'+t+'-list').classList.remove('open');
+    }
   });
 });
+document.addEventListener('touchstart',e=>{
+  ['out','in'].forEach(t=>{
+    const w=document.getElementById('dd-'+t+'-wrap');
+    if(w&&!w.contains(e.target)){
+      document.getElementById('dd-'+t+'-list').classList.remove('open');
+    }
+  });
+},{passive:true});
 
 /* ============================================================
    NAV / PAGE
