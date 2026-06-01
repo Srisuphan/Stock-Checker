@@ -60,6 +60,12 @@ input[type=date]{border:1.5px solid #C4B5FD;border-radius:10px;padding:10px 12px
 .log-card{background:#fff;border:1.5px solid #DDD6FE;border-radius:12px;overflow:hidden;margin-bottom:10px}
 .btn-del{border:1px solid #FBCFE8;background:#FDF2F8;border-radius:6px;cursor:pointer;color:#EC4899;font-size:14px;font-weight:600;padding:5px 12px;flex-shrink:0;line-height:1.4}
 .btn-del:hover{background:#FBCFE8}
+.log-filter-sel{border:1.5px solid #C4B5FD;border-radius:10px;padding:8px 12px;font-size:15px;background:#FAFAFF;color:#3B1FA3;outline:none;cursor:pointer}
+.log-quick-btn{padding:8px 16px;border-radius:20px;border:1.5px solid #C4B5FD;background:#F5F3FF;color:#6D28D9;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap}
+.log-quick-btn:hover,.log-quick-btn.active{background:linear-gradient(135deg,#8B5CF6,#7C3AED);color:#fff;border-color:#7C3AED}
+.log-quick-clear{border-color:#DDD6FE;color:#A78BFA}
+.log-quick-clear:hover{background:#EDE9FE;color:#6D28D9;border-color:#C4B5FD}
+.btn-del:hover{background:#FBCFE8}
 
 table{width:100%;border-collapse:collapse;font-size:15px}
 th{text-align:left;padding:11px 14px;background:#F5F3FF;color:#5B21B6;font-weight:600;font-size:14px}
@@ -148,6 +154,21 @@ tr:hover td{background:#FAFAFF}
       <span style="font-size:13px;color:#7C3AED;font-weight:500">ลัง</span>
       <button class="btn-submit btn-out" onclick="submitTx('out')" id="btn-out-submit">ยืนยันส่งออก</button>
     </div>
+    <div class="log-filter-bar" id="out-filter-bar" style="display:none;margin-top:1.25rem;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      <select id="out-f-month" onchange="renderDayLog('out')" class="log-filter-sel">
+        <option value="">ทุกเดือน</option>
+        <option value="1">มกราคม</option><option value="2">กุมภาพันธ์</option><option value="3">มีนาคม</option>
+        <option value="4">เมษายน</option><option value="5">พฤษภาคม</option><option value="6">มิถุนายน</option>
+        <option value="7">กรกฎาคม</option><option value="8">สิงหาคม</option><option value="9">กันยายน</option>
+        <option value="10">ตุลาคม</option><option value="11">พฤศจิกายน</option><option value="12">ธันวาคม</option>
+      </select>
+      <select id="out-f-year" onchange="renderDayLog('out')" class="log-filter-sel">
+        <option value="">ทุกปี</option>
+      </select>
+      <button class="log-quick-btn" onclick="setQuickFilter('out',30)">ย้อนหลัง 30 วัน</button>
+      <button class="log-quick-btn" onclick="setQuickFilter('out',15)">ย้อนหลัง 15 วัน</button>
+      <button class="log-quick-btn log-quick-clear" onclick="clearFilter('out')">ดูทั้งหมด</button>
+    </div>
     <div class="day-log" id="out-daylog"></div>
   </div>
 
@@ -179,6 +200,21 @@ tr:hover td{background:#FAFAFF}
       </div>
       <span style="font-size:13px;color:#7C3AED;font-weight:500">ลัง</span>
       <button class="btn-submit btn-in" onclick="submitTx('in')" id="btn-in-submit">ยืนยันรับเข้า</button>
+    </div>
+    <div class="log-filter-bar" id="in-filter-bar" style="display:none;margin-top:1.25rem;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      <select id="in-f-month" onchange="renderDayLog('in')" class="log-filter-sel">
+        <option value="">ทุกเดือน</option>
+        <option value="1">มกราคม</option><option value="2">กุมภาพันธ์</option><option value="3">มีนาคม</option>
+        <option value="4">เมษายน</option><option value="5">พฤษภาคม</option><option value="6">มิถุนายน</option>
+        <option value="7">กรกฎาคม</option><option value="8">สิงหาคม</option><option value="9">กันยายน</option>
+        <option value="10">ตุลาคม</option><option value="11">พฤศจิกายน</option><option value="12">ธันวาคม</option>
+      </select>
+      <select id="in-f-year" onchange="renderDayLog('in')" class="log-filter-sel">
+        <option value="">ทุกปี</option>
+      </select>
+      <button class="log-quick-btn" onclick="setQuickFilter('in',30)">ย้อนหลัง 30 วัน</button>
+      <button class="log-quick-btn" onclick="setQuickFilter('in',15)">ย้อนหลัง 15 วัน</button>
+      <button class="log-quick-btn log-quick-clear" onclick="clearFilter('in')">ดูทั้งหมด</button>
     </div>
     <div class="day-log" id="in-daylog"></div>
   </div>
@@ -495,17 +531,82 @@ async function deleteTx(id){
 /* ============================================================
    RENDER DAY LOG
    ============================================================ */
+// quickFilter state: {out: {days:30}, in: null}
+const quickFilter={out:null,in:null};
+
+function setQuickFilter(t,days){
+  quickFilter[t]={days};
+  // clear month/year selects
+  document.getElementById(t+'-f-month').value='';
+  document.getElementById(t+'-f-year').value='';
+  // mark active button
+  document.querySelectorAll('#'+t+'-filter-bar .log-quick-btn').forEach(b=>{
+    b.classList.toggle('active', b.textContent.includes(days));
+  });
+  renderDayLog(t);
+}
+
+function clearFilter(t){
+  quickFilter[t]=null;
+  document.getElementById(t+'-f-month').value='';
+  document.getElementById(t+'-f-year').value='';
+  document.querySelectorAll('#'+t+'-filter-bar .log-quick-btn').forEach(b=>b.classList.remove('active'));
+  renderDayLog(t);
+}
+
+function updateYearOptions(t, rows){
+  const sel=document.getElementById(t+'-f-year');
+  const cur=sel.value;
+  const years=[...new Set(rows.map(h=>new Date(h.date).getFullYear()))].sort((a,b)=>b-a);
+  while(sel.options.length>1) sel.remove(1);
+  years.forEach(y=>{ const o=document.createElement('option'); o.value=y; o.textContent=y; sel.appendChild(o); });
+  if([...sel.options].some(o=>o.value==cur)) sel.value=cur;
+}
+
 function renderDayLog(t){
   const el=document.getElementById(t+'-daylog');
-  const rows=txLog.filter(h=>h.type===t);
-  if(!rows.length){el.innerHTML='';return;}
+  const filterBar=document.getElementById(t+'-filter-bar');
+  let rows=txLog.filter(h=>h.type===t);
+
+  if(!rows.length){ el.innerHTML=''; filterBar.style.display='none'; return; }
+
+  // แสดง filter bar และอัพเดต year options
+  filterBar.style.display='flex';
+  updateYearOptions(t, rows);
+
+  // กรองด้วย quick filter (days)
+  if(quickFilter[t]){
+    const cutoff=new Date();
+    cutoff.setDate(cutoff.getDate()-quickFilter[t].days);
+    cutoff.setHours(0,0,0,0);
+    rows=rows.filter(h=>new Date(h.date)>=cutoff);
+  } else {
+    // กรองด้วย month/year selects
+    const fm=document.getElementById(t+'-f-month').value;
+    const fy=document.getElementById(t+'-f-year').value;
+    if(fm||fy) rows=rows.filter(h=>{
+      const d=new Date(h.date);
+      return (!fm||(d.getMonth()+1)==fm)&&(!fy||d.getFullYear()==fy);
+    });
+  }
+
+  if(!rows.length){
+    el.innerHTML='<div class="empty">ไม่พบรายการในช่วงที่เลือก</div>';
+    return;
+  }
+
+  // จัดกลุ่มตามวัน แล้วเรียงจากวันล่าสุด
+  // เรียง rows ทั้งหมดจากวันล่าสุด → เก่าสุด ก่อน group
+  rows.sort((a,b)=>new Date(b.date)-new Date(a.date)||fmtTime(b.time).localeCompare(fmtTime(a.time)));
   const byDate={};
   rows.forEach(h=>{ if(!byDate[h.date])byDate[h.date]=[]; byDate[h.date].push(h); });
   const isOut=t==='out';
   const sc=isOut?'#EC4899':'#10B981', sign=isOut?'−':'+';
-  let html='<div style="font-size:13px;font-weight:600;color:#5B21B6;margin-bottom:10px">รายการที่บันทึกไว้</div>';
-  Object.keys(byDate).sort((a,b)=>b.localeCompare(a)).forEach(date=>{
-    const items=byDate[date];
+
+  let html='';
+  Object.keys(byDate).sort((a,b)=>new Date(b)-new Date(a)).forEach(date=>{
+    // เรียงรายการในวันจากเวลาล่าสุด
+    const items=byDate[date].sort((a,b)=>fmtTime(b.time).localeCompare(fmtTime(a.time)));
     html+=`<div class="log-card"><div class="day-log-header">📅 ${fmtDate(date)} — ${items.length} รายการ</div>`;
     items.forEach(h=>{
       html+=`<div class="log-item">
